@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-primary py-8 px-4 lg:px-40 sticky top-0 z-50 shadow-md">
+    <nav class="bg-primary py-8 px-4 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-md">
       <div class="flex justify-between items-center">
         <div class="text-4xl font-bold cursor-pointer" @click="scrollToSection('home')">
           <h3 class="flex items-center">
@@ -10,9 +10,46 @@
         <div>
           <ul class="flex items-center gap-12 text-lg">
             <li><a @click.prevent="scrollToSection('home')" href="#home" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Home</a></li>
-            <li><a @click.prevent="scrollToSection('about')" href="#about" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">About Us</a></li>
-            <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
+            
+            <!-- About Us Dropdown -->
+            <li class="relative">
+              <a 
+                @click.prevent="handleAboutClick"
+                href="#about" 
+                class="text-black hover:text-accent transition-colors cursor-pointer font-medium flex items-center gap-1"
+              >
+                About Us
+                <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{ 'rotate-180': showAboutDropdown }"></i>
+              </a>
+              
+              <!-- Dropdown Menu -->
+              <div v-if="showAboutDropdown" class="absolute top-full left-0 mt-4 w-64 bg-white rounded-xl shadow-2xl border-2 border-gray-100 overflow-hidden z-50">
+                <a 
+                  @click.prevent="scrollToSectionAndClose('features')" 
+                  href="#features" 
+                  class="block px-6 py-4 text-gray-800 hover:bg-primary hover:text-accent transition-colors font-medium border-b border-gray-100"
+                >
+                  <i class="fa-solid fa-star mr-2"></i> Why Choose Our Salads
+                </a>
+                <a 
+                  @click.prevent="scrollToSectionAndClose('chef')" 
+                  href="#chef" 
+                  class="block px-6 py-4 text-gray-800 hover:bg-primary hover:text-accent transition-colors font-medium border-b border-gray-100"
+                >
+                  <i class="fa-solid fa-hat-chef mr-2"></i> Meet Our Best Chef's
+                </a>
+                <a 
+                  @click.prevent="scrollToSectionAndClose('reviews')" 
+                  href="#reviews" 
+                  class="block px-6 py-4 text-gray-800 hover:bg-primary hover:text-accent transition-colors font-medium"
+                >
+                  <i class="fa-solid fa-comments mr-2"></i> Guest Reviews
+                </a>
+              </div>
+            </li>
+            
             <li><a @click.prevent="scrollToSection('salads')" href="#salads" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Salads</a></li>
+            <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
             <li><a @click.prevent="scrollToSection('contact')" href="#contact" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Contact</a></li>
             <li><i @click="toggleSearch" class="fa-solid fa-magnifying-glass cursor-pointer hover:text-accent transition-colors"></i></li>
           </ul>
@@ -31,12 +68,19 @@
               type="text"
               v-model="searchQuery"
               placeholder="Search for salads, healthy food..."
-              class="w-full px-6 py-4 pl-14 text-lg border-2 border-primary rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
+              class="w-full px-6 py-4 pl-14 pr-32 text-lg border-2 border-primary rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
               @keyup.escape="closeSearch"
+              @keyup.enter="goToSearchPage"
             />
             <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 transform -translate-y-1/2 text-primary text-xl"></i>
-            <button @click="closeSearch" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-              <i class="fa-solid fa-times text-2xl"></i>
+            <button 
+              @click="goToSearchPage"
+              class="absolute right-16 top-1/2 transform -translate-y-1/2 bg-accent hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300"
+            >
+              Search
+            </button>
+            <button @click="closeSearch" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+              <i class="fa-solid fa-times text-xl"></i>
             </button>
           </div>
         </div>
@@ -44,7 +88,15 @@
         <!-- Search Results -->
         <div class="overflow-y-auto max-h-[60vh] p-6">
           <div v-if="searchQuery && filteredItems.length > 0">
-            <p class="text-sm text-gray-600 mb-4">Found {{ filteredItems.length }} items</p>
+            <div class="flex justify-between items-center mb-4">
+              <p class="text-sm text-gray-600">Found {{ filteredItems.length }} items</p>
+              <button 
+                @click="goToSearchPage"
+                class="text-accent hover:text-green-600 font-semibold text-sm flex items-center gap-1"
+              >
+                View All <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
             <div class="space-y-4">
               <div
                 v-for="item in filteredItems"
@@ -105,12 +157,26 @@ import { ref, computed, watch, nextTick } from 'vue';
 const showSearch = ref(false);
 const searchQuery = ref('');
 const searchInput = ref(null);
+const showAboutDropdown = ref(false);
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+};
+
+const toggleAboutDropdown = () => {
+  showAboutDropdown.value = !showAboutDropdown.value;
+};
+
+const handleAboutClick = () => {
+  toggleAboutDropdown();
+};
+
+const scrollToSectionAndClose = (sectionId) => {
+  scrollToSection(sectionId);
+  showAboutDropdown.value = false;
 };
 
 const toggleSearch = () => {
@@ -127,6 +193,13 @@ const toggleSearch = () => {
 const closeSearch = () => {
   showSearch.value = false;
   searchQuery.value = '';
+};
+
+const goToSearchPage = () => {
+  if (searchQuery.value.trim()) {
+    navigateTo(`/search?q=${encodeURIComponent(searchQuery.value)}`);
+    closeSearch();
+  }
 };
 
 // Menu items data

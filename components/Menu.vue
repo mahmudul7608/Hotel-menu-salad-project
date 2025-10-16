@@ -1,8 +1,8 @@
 <template>
-  <section id="menu" class="bg-white py-16 px-4 scroll-mt-20">
+  <section id="menu" class="bg-white py-16 px-4 relative">
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-8">
         <h1 class="text-5xl font-bold mb-4">
           Our Restaurant <span class="text-accent">Menu</span>
         </h1>
@@ -65,9 +65,93 @@
                 <img :src="item.image" :alt="item.name" class="w-28 h-28 object-cover rounded-xl shadow-md" />
               </div>
             </div>
-            <button class="w-full bg-primary hover:bg-accent text-black hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
+            <button 
+              @click="addToCart(item)"
+              class="w-full bg-primary hover:bg-accent text-black hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+            >
               <i class="fa-solid fa-plus"></i>
               Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Button -->
+      <button 
+        @click="showCart = true"
+        class="fixed bottom-8 right-8 bg-accent text-white w-16 h-16 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 flex items-center justify-center z-40"
+      >
+        <i class="fa-solid fa-shopping-cart text-2xl"></i>
+        <span v-if="cartItemCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold">{{ cartItemCount }}</span>
+      </button>
+
+      <!-- Cart Sidebar -->
+      <div v-if="showCart" class="fixed inset-0 bg-black bg-opacity-50 z-50" @click="showCart = false">
+        <div @click.stop class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-white shadow-2xl transform transition-transform duration-300 flex flex-col">
+          <!-- Cart Header -->
+          <div class="bg-accent text-white p-6 flex justify-between items-center">
+            <h2 class="text-2xl font-bold flex items-center gap-2">
+              <i class="fa-solid fa-shopping-cart"></i>
+              Your Cart ({{ cartItemCount }})
+            </h2>
+            <button @click="showCart = false" class="text-white hover:text-gray-200 text-2xl">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Cart Items -->
+          <div class="flex-1 overflow-y-auto p-6">
+            <div v-if="cart.length === 0" class="text-center py-12">
+              <i class="fa-solid fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
+              <p class="text-xl text-gray-500">Your cart is empty</p>
+              <p class="text-sm text-gray-400 mt-2">Add some delicious items!</p>
+            </div>
+            <div v-else class="space-y-4">
+              <div v-for="item in cart" :key="item.id" class="bg-gray-50 rounded-lg p-4 flex gap-4">
+                <img :src="item.image" :alt="item.name" class="w-20 h-20 object-cover rounded-lg" />
+                <div class="flex-1">
+                  <h3 class="font-bold text-lg mb-1">{{ item.name }}</h3>
+                  <p class="text-accent font-bold">Tk {{ item.price }}</p>
+                  <div class="flex items-center gap-3 mt-2">
+                    <button @click="decreaseQuantity(item)" class="bg-gray-200 hover:bg-gray-300 w-8 h-8 rounded-full flex items-center justify-center">
+                      <i class="fa-solid fa-minus text-sm"></i>
+                    </button>
+                    <span class="font-bold text-lg">{{ item.quantity }}</span>
+                    <button @click="increaseQuantity(item)" class="bg-accent hover:bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center">
+                      <i class="fa-solid fa-plus text-sm"></i>
+                    </button>
+                    <button @click="removeFromCart(item)" class="ml-auto text-red-500 hover:text-red-700">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cart Summary -->
+          <div v-if="cart.length > 0" class="border-t-2 border-gray-200 p-6 bg-gray-50">
+            <div class="space-y-3 mb-4">
+              <div class="flex justify-between text-lg">
+                <span class="text-gray-700">Subtotal:</span>
+                <span class="font-semibold">Tk {{ subtotal.toFixed(2) }}</span>
+              </div>
+              <div class="flex justify-between text-lg">
+                <span class="text-gray-700">VAT (15%):</span>
+                <span class="font-semibold">Tk {{ vat.toFixed(2) }}</span>
+              </div>
+              <div class="flex justify-between text-lg">
+                <span class="text-gray-700">Service Charge (5%):</span>
+                <span class="font-semibold">Tk {{ serviceCharge.toFixed(2) }}</span>
+              </div>
+              <div class="border-t-2 border-gray-300 pt-3 flex justify-between text-2xl font-bold">
+                <span>Total:</span>
+                <span class="text-accent">Tk {{ total.toFixed(2) }}</span>
+              </div>
+            </div>
+            <button class="w-full bg-accent hover:bg-green-600 text-white font-bold py-4 rounded-lg text-lg transition-all duration-300 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-check-circle"></i>
+              Proceed to Checkout
             </button>
           </div>
         </div>
@@ -77,9 +161,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 
 const activeCategory = ref('all');
+const showCart = ref(false);
+const cart = reactive([]);
 
 const categories = [
   { id: 'all', name: 'All Items', count: 12 },
@@ -223,5 +309,55 @@ const filteredMenuItems = computed(() => {
   }
   
   return filtered;
+});
+
+// Cart Functions
+const addToCart = (item) => {
+  const existingItem = cart.find(cartItem => cartItem.id === item.id);
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({ ...item, quantity: 1 });
+  }
+};
+
+const increaseQuantity = (item) => {
+  item.quantity++;
+};
+
+const decreaseQuantity = (item) => {
+  if (item.quantity > 1) {
+    item.quantity--;
+  } else {
+    removeFromCart(item);
+  }
+};
+
+const removeFromCart = (item) => {
+  const index = cart.findIndex(cartItem => cartItem.id === item.id);
+  if (index !== -1) {
+    cart.splice(index, 1);
+  }
+};
+
+// Cart Calculations
+const cartItemCount = computed(() => {
+  return cart.reduce((total, item) => total + item.quantity, 0);
+});
+
+const subtotal = computed(() => {
+  return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+});
+
+const vat = computed(() => {
+  return subtotal.value * 0.15; // 15% VAT
+});
+
+const serviceCharge = computed(() => {
+  return subtotal.value * 0.05; // 5% Service Charge
+});
+
+const total = computed(() => {
+  return subtotal.value + vat.value + serviceCharge.value;
 });
 </script>

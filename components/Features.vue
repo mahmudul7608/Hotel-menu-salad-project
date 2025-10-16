@@ -1,7 +1,7 @@
 <template>
-  <section class="py-24 px-4 lg:px-40 bg-gradient-to-b from-white to-gray-50">
+  <section id="features" class="py-16 px-4 lg:px-40 bg-gradient-to-b from-white to-gray-50">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
+      <div class="text-center mb-10">
         <h2 class="text-5xl font-bold mb-4">
           Why Choose <span class="text-accent">Our Salads</span>
         </h2>
