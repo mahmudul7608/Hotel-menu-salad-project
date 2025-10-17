@@ -5,16 +5,35 @@
     <div class="pt-32 pb-16 px-4">
       <div class="max-w-7xl mx-auto">
         <!-- Search Header -->
-        <div class="mb-8">
+        <div class="mb-8 relative">
+          <button 
+            @click="navigateTo('/')"
+            class="absolute -top-4 right-0 bg-red-500 hover:bg-red-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group z-10"
+            title="Close and go back to home"
+          >
+            <i class="fa-solid fa-times text-2xl group-hover:rotate-90 transition-transform duration-300"></i>
+          </button>
           <h1 class="text-4xl font-bold mb-2">Search Results</h1>
           <p class="text-xl text-gray-600">
-            Found <span class="text-accent font-bold">{{ filteredItems.length }}</span> items for 
-            <span class="font-semibold">"{{ searchQuery }}"</span>
+            <span v-if="isLoading" class="text-accent font-bold">Searching...</span>
+            <span v-else>
+              Found <span class="text-accent font-bold">{{ filteredItems.length }}</span> items for 
+              <span class="font-semibold">"{{ searchQuery }}"</span>
+            </span>
+          </p>
+          <p v-if="apiItems.length > 0" class="text-sm text-green-600 mt-2">
+            <i class="fa-solid fa-check-circle"></i> Including {{ apiItems.length }} items from TheMealDB API
           </p>
         </div>
 
+        <!-- Loading Indicator -->
+        <div v-if="isLoading" class="text-center py-20">
+          <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-accent"></div>
+          <p class="text-xl text-gray-600 mt-4">Searching for delicious meals...</p>
+        </div>
+
         <!-- Search Results Grid -->
-        <div v-if="filteredItems.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-if="!isLoading && filteredItems.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="item in filteredItems"
             :key="item.id"
@@ -53,7 +72,7 @@
         </div>
 
         <!-- No Results -->
-        <div v-else class="text-center py-20">
+        <div v-else-if="!isLoading" class="text-center py-20">
           <i class="fa-solid fa-search text-8xl text-gray-300 mb-6"></i>
           <h2 class="text-3xl font-bold text-gray-700 mb-4">No items found</h2>
           <p class="text-xl text-gray-500 mb-8">Try searching for something else</p>
@@ -153,17 +172,66 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue';
+import { ref, computed, reactive, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const searchQuery = ref('');
 const showCart = ref(false);
 const cart = reactive([]);
+const apiItems = ref([]);
+const isLoading = ref(false);
+const apiError = ref('');
 
-// Get search query from URL
+// Fetch meals from TheMealDB API
+const fetchMealsFromAPI = async (query) => {
+  if (!query) return;
+  
+  isLoading.value = true;
+  apiError.value = '';
+  
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`);
+    const data = await response.json();
+    
+    if (data.meals && data.meals.length > 0) {
+      // Transform API data to match our item format
+      apiItems.value = data.meals.map((meal, index) => ({
+        id: `api-${meal.idMeal}`,
+        name: meal.strMeal,
+        price: Math.floor(Math.random() * (600 - 300) + 300), // Random price between 300-600
+        oldPrice: null,
+        category: meal.strCategory.toLowerCase(),
+        image: meal.strMealThumb,
+        description: meal.strInstructions ? meal.strInstructions.substring(0, 150) + '...' : 'Delicious meal prepared with fresh ingredients.',
+        tags: [meal.strCategory, meal.strArea].filter(Boolean)
+      }));
+    } else {
+      apiItems.value = [];
+    }
+  } catch (error) {
+    console.error('Error fetching meals:', error);
+    apiError.value = 'Failed to fetch meals from API';
+    apiItems.value = [];
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+// Get search query from URL and fetch API data
 onMounted(() => {
   searchQuery.value = route.query.q || '';
+  if (searchQuery.value) {
+    fetchMealsFromAPI(searchQuery.value);
+  }
+});
+
+// Watch for route changes
+watch(() => route.query.q, (newQuery) => {
+  searchQuery.value = newQuery || '';
+  if (searchQuery.value) {
+    fetchMealsFromAPI(searchQuery.value);
+  }
 });
 
 // Menu items data (same as in Menu.vue and Navigation.vue)
@@ -290,12 +358,17 @@ const menuItems = [
   }
 ];
 
+// Combine API items with local menu items
+const allItems = computed(() => {
+  return [...apiItems.value, ...menuItems];
+});
+
 // Filter items based on search query
 const filteredItems = computed(() => {
-  if (!searchQuery.value) return menuItems;
+  if (!searchQuery.value) return allItems.value;
   
   const query = searchQuery.value.toLowerCase();
-  return menuItems.filter(item =>
+  return allItems.value.filter(item =>
     item.name.toLowerCase().includes(query) ||
     item.description.toLowerCase().includes(query) ||
     item.tags.some(tag => tag.toLowerCase().includes(query)) ||

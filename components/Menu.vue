@@ -15,7 +15,7 @@
           <button
             v-for="category in categories"
             :key="category.id"
-            @click="activeCategory = category.id"
+            @click="setActiveCategory(category.id)"
             :class="[
               'px-6 py-3 rounded-lg font-semibold transition-all duration-300',
               activeCategory === category.id
@@ -39,7 +39,7 @@
         <!-- Menu Items Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
-            v-for="item in filteredMenuItems"
+            v-for="item in paginatedItems"
             :key="item.id"
             class="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-1"
           >
@@ -72,6 +72,30 @@
               <i class="fa-solid fa-plus"></i>
               Add to Cart
             </button>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div v-if="hasMoreItems" class="text-center mt-12">
+          <button 
+            @click="loadMore"
+            class="group bg-gradient-to-r from-accent to-green-600 text-white px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto"
+          >
+            <i class="fa-solid fa-plus-circle text-2xl"></i>
+            Load More Items
+            <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+          </button>
+          <p class="text-gray-600 mt-4">
+            Showing <span class="font-bold text-accent">{{ paginatedItems.length }}</span> of 
+            <span class="font-bold">{{ filteredMenuItems.length }}</span> items
+          </p>
+        </div>
+
+        <!-- All Items Loaded Message -->
+        <div v-else-if="filteredMenuItems.length > 0" class="text-center mt-12">
+          <div class="inline-flex items-center gap-2 bg-green-50 text-accent px-6 py-3 rounded-full border-2 border-accent">
+            <i class="fa-solid fa-check-circle text-xl"></i>
+            <span class="font-semibold">All items loaded ({{ filteredMenuItems.length }} total)</span>
           </div>
         </div>
       </div>
@@ -166,6 +190,8 @@ import { ref, computed, reactive } from 'vue';
 const activeCategory = ref('all');
 const showCart = ref(false);
 const cart = reactive([]);
+const itemsPerPage = 8;
+const currentPage = ref(1);
 
 const categories = [
   { id: 'all', name: 'All Items', count: 12 },
@@ -310,6 +336,28 @@ const filteredMenuItems = computed(() => {
   
   return filtered;
 });
+
+// Paginated items - show only items up to current page
+const paginatedItems = computed(() => {
+  const endIndex = currentPage.value * itemsPerPage;
+  return filteredMenuItems.value.slice(0, endIndex);
+});
+
+// Check if there are more items to load
+const hasMoreItems = computed(() => {
+  return paginatedItems.value.length < filteredMenuItems.value.length;
+});
+
+// Load more items
+const loadMore = () => {
+  currentPage.value++;
+};
+
+// Reset pagination when category changes
+const setActiveCategory = (categoryId) => {
+  activeCategory.value = categoryId;
+  currentPage.value = 1;
+};
 
 // Cart Functions
 const addToCart = (item) => {

@@ -1,10 +1,10 @@
 <template>
   <section
     id="home"
-    class="bg-primary min-h-screen flex items-center px-4 lg:px-40"
+    class="bg-primary min-h-screen flex items-center px-4 lg:px-40 pt-32"
   >
     <div
-      class="w-full flex flex-col lg:flex-row items-center justify-between gap-8 py-8"
+      class="w-full flex flex-col lg:flex-row items-center justify-between gap-8 py-16"
     >
       <div class="lg:w-1/2 text-center lg:text-left">
         <h1 class="text-5xl sm:text-6xl lg:text-7xl font-sans font-bold">
@@ -37,12 +37,12 @@
       </div>
       <div class="lg:w-1/2 flex justify-center">
         <div
-          class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden animate-spin-slow shadow-2xl"
+          class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl"
         >
           <img
             src="/img/banner1.png"
             alt="Fresh Salad"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover animate-spin-slow"
           />
         </div>
       </div>

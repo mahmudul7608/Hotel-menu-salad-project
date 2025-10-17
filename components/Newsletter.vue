@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 px-4 bg-gradient-to-br from-green-50 to-emerald-100 relative overflow-hidden">
+  <section id="contact" class="py-32 px-4 mt-20 bg-gradient-to-br from-green-50 to-emerald-100 relative overflow-hidden">
     <!-- Decorative Elements -->
     <div class="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl"></div>
