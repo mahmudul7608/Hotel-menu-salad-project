@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen bg-dark-gradient">
     <Navigation />
     <Hero />
     <About />

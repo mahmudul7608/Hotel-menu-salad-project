@@ -1,22 +1,22 @@
 <template>
   <div>
-    <nav class="bg-primary py-8 px-4 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-md">
+    <nav class="bg-navy-blue/95 backdrop-blur-sm py-8 px-4 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-md border-b border-white/10">
       <div class="flex justify-between items-center">
-        <div class="text-4xl font-bold cursor-pointer" @click="scrollToSection('home')">
+        <div class="text-4xl font-bold cursor-pointer text-white" @click="scrollToSection('home')">
           <h3 class="flex items-center">
-            Sa<i class="fa-sharp fa-solid fa-spoon text-orange-700 -rotate-45 -ml-1 text-3xl"></i>ads
+            Sa<i class="fa-sharp fa-solid fa-spoon text-orange-500 -rotate-45 -ml-1 text-3xl"></i>ads
           </h3>
         </div>
         <div>
           <ul class="flex items-center gap-12 text-lg">
-            <li><a @click.prevent="scrollToSection('home')" href="#home" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Home</a></li>
+            <li><a @click.prevent="scrollToSection('home')" href="#home" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Home</a></li>
             
             <!-- About Us Dropdown -->
             <li class="relative">
               <a 
                 @click.prevent="handleAboutClick"
                 href="#about" 
-                class="text-black hover:text-accent transition-colors cursor-pointer font-medium flex items-center gap-1"
+                class="text-white hover:text-accent transition-colors cursor-pointer font-medium flex items-center gap-1"
               >
                 About Us
                 <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{ 'rotate-180': showAboutDropdown }"></i>
@@ -48,10 +48,10 @@
               </div>
             </li>
             
-            <li><a @click.prevent="scrollToSection('salads')" href="#salads" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Salads</a></li>
-            <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
-            <li><a @click.prevent="scrollToSection('contact')" href="#contact" class="text-black hover:text-accent transition-colors cursor-pointer font-medium">Contact</a></li>
-            <li><i @click="toggleSearch" class="fa-solid fa-magnifying-glass cursor-pointer hover:text-accent transition-colors"></i></li>
+            <li><a @click.prevent="scrollToSection('salads')" href="#salads" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Salads</a></li>
+            <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
+            <li><a @click.prevent="scrollToSection('contact')" href="#contact" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Contact</a></li>
+            <li><i @click="toggleSearch" class="fa-solid fa-magnifying-glass cursor-pointer text-white hover:text-accent transition-colors"></i></li>
           </ul>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <section id="salads" class="py-16 px-4 bg-primary">
+  <section id="salads" class="py-16 px-4 bg-[#0a0a0a]">
     <div class="text-center mb-8">
       <h1 class="text-5xl font-bold">
         Our <span class="text-accent">Popular</span> salads

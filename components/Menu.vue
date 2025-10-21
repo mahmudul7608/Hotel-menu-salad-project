@@ -1,17 +1,17 @@
 <template>
-  <section id="menu" class="bg-white py-16 px-4 relative">
+  <section id="menu" class="bg-[#0a0a0a] py-16 px-4 relative">
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-8">
         <h1 class="text-5xl font-bold mb-4">
           Our Restaurant <span class="text-accent">Menu</span>
         </h1>
-        <p class="text-xl text-gray-600">Browse our delicious and healthy menu options</p>
+        <p class="text-xl text-gray-300">Browse our delicious and healthy menu options</p>
       </div>
 
       <!-- Category Tabs -->
       <div class="mb-12">
-        <div class="flex flex-wrap justify-center gap-4 border-b-2 border-gray-200 pb-4">
+        <div class="flex flex-wrap justify-center gap-4 border-b-2 border-white/20 pb-4">
           <button
             v-for="category in categories"
             :key="category.id"
@@ -19,8 +19,8 @@
             :class="[
               'px-6 py-3 rounded-lg font-semibold transition-all duration-300',
               activeCategory === category.id
-                ? 'bg-primary text-black'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-accent text-white'
+                : 'bg-white/10 text-white hover:bg-white/20'
             ]"
           >
             {{ category.name }} ({{ category.count }})
@@ -34,23 +34,23 @@
           <i class="fa-solid fa-fire text-accent text-3xl"></i>
           <h2 class="text-3xl font-bold">Popular</h2>
         </div>
-        <p class="text-gray-600 mb-8">Most ordered right now.</p>
+        <p class="text-gray-300 mb-8">Most ordered right now.</p>
 
         <!-- Menu Items Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="item in paginatedItems"
             :key="item.id"
-            class="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-1"
+            class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-6 hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-1"
           >
             <div class="flex justify-between items-start mb-4">
               <div class="flex-1">
-                <h3 class="text-xl font-bold mb-2">{{ item.name }}</h3>
+                <h3 class="text-xl font-bold mb-2 text-white">{{ item.name }}</h3>
                 <div class="flex items-center gap-2 mb-3">
                   <span class="text-accent font-bold text-2xl">Tk {{ item.price }}</span>
                   <span v-if="item.oldPrice" class="text-gray-400 line-through text-sm">Tk {{ item.oldPrice }}</span>
                 </div>
-                <p class="text-sm text-gray-600 leading-relaxed mb-4">{{ item.description }}</p>
+                <p class="text-sm text-gray-300 leading-relaxed mb-4">{{ item.description }}</p>
                 <div class="flex flex-wrap gap-2">
                   <span
                     v-for="tag in item.tags"
@@ -67,7 +67,7 @@
             </div>
             <button 
               @click="addToCart(item)"
-              class="w-full bg-primary hover:bg-accent text-black hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              class="w-full bg-accent hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <i class="fa-solid fa-plus"></i>
               Add to Cart
@@ -85,7 +85,7 @@
             Load More Items
             <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
           </button>
-          <p class="text-gray-600 mt-4">
+          <p class="text-gray-300 mt-4">
             Showing <span class="font-bold text-accent">{{ paginatedItems.length }}</span> of 
             <span class="font-bold">{{ filteredMenuItems.length }}</span> items
           </p>
@@ -93,7 +93,7 @@
 
         <!-- All Items Loaded Message -->
         <div v-else-if="filteredMenuItems.length > 0" class="text-center mt-12">
-          <div class="inline-flex items-center gap-2 bg-green-50 text-accent px-6 py-3 rounded-full border-2 border-accent">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-full border-2 border-accent">
             <i class="fa-solid fa-check-circle text-xl"></i>
             <span class="font-semibold">All items loaded ({{ filteredMenuItems.length }} total)</span>
           </div>

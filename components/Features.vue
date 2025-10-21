@@ -1,11 +1,11 @@
 <template>
-  <section id="features" class="py-16 px-4 lg:px-40 bg-gradient-to-b from-white to-gray-50">
+  <section id="features" class="py-16 px-4 lg:px-40 bg-[#0a0a0a]">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-10">
         <h2 class="text-5xl font-bold mb-4">
           Why Choose <span class="text-accent">Our Salads</span>
         </h2>
-        <p class="text-xl text-gray-600">
+        <p class="text-xl text-gray-300">
           Discover the amazing benefits of our fresh and healthy salads
         </p>
       </div>

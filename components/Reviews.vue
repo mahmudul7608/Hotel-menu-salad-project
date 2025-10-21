@@ -1,5 +1,5 @@
 <template>
-  <section id="reviews" class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-16 px-4 lg:px-28 relative overflow-hidden">
+  <section id="reviews" class="bg-[#0a0a0a] py-16 px-4 lg:px-28 relative overflow-hidden">
     <!-- Decorative Background Elements -->
     <div class="absolute top-0 right-0 w-96 h-96 bg-green-200/30 rounded-full blur-3xl"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 bg-teal-200/30 rounded-full blur-3xl"></div>
@@ -9,14 +9,14 @@
         <h1 class="text-5xl lg:text-6xl font-bold mb-4">
           What Our <span class="text-accent">Customers Say</span>
         </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
           Don't just take our word for it. Here's what our valued customers have to say about their experience.
         </p>
       </div>
 
       <!-- Reviews Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="review in reviews" :key="review.id" class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative">
+        <div v-for="review in reviews" :key="review.id" class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2 relative">
           <!-- Quote Icon -->
           <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent rounded-full flex items-center justify-center shadow-lg">
             <i class="fa-solid fa-quote-left text-white text-xl"></i>
@@ -29,17 +29,17 @@
           </div>
           
           <!-- Review Title -->
-          <h3 class="text-2xl font-bold mb-3 text-gray-800">{{ review.title }}</h3>
+          <h3 class="text-2xl font-bold mb-3 text-white">{{ review.title }}</h3>
           
           <!-- Review Text -->
-          <p class="text-gray-600 leading-relaxed mb-6">{{ review.text }}</p>
+          <p class="text-gray-300 leading-relaxed mb-6">{{ review.text }}</p>
           
           <!-- Reviewer Info -->
-          <div class="flex items-center gap-4 pt-4 border-t border-gray-200">
+          <div class="flex items-center gap-4 pt-4 border-t border-white/20">
             <img :src="review.image" alt="Reviewer" class="w-14 h-14 rounded-full object-cover border-2 border-accent" />
             <div>
-              <h4 class="font-bold text-gray-800">{{ review.author }}</h4>
-              <p class="text-sm text-gray-500">{{ review.role }}</p>
+              <h4 class="font-bold text-white">{{ review.author }}</h4>
+              <p class="text-sm text-gray-400">{{ review.role }}</p>
             </div>
           </div>
         </div>
@@ -47,33 +47,33 @@
 
       <!-- Stats Section -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-        <div class="bg-white border-2 border-green-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
+        <div class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:border-accent transform hover:-translate-y-1 transition-all duration-300 text-center">
           <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-users text-accent text-xl"></i>
           </div>
           <h3 class="text-4xl font-bold text-accent mb-2">{{ statsCustomers }}K+</h3>
-          <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Happy Customers</p>
+          <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">Happy Customers</p>
         </div>
-        <div class="bg-white border-2 border-yellow-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
+        <div class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:border-yellow-500 transform hover:-translate-y-1 transition-all duration-300 text-center">
           <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-star text-yellow-600 text-xl"></i>
           </div>
           <h3 class="text-4xl font-bold text-yellow-600 mb-2">{{ statsRating }}</h3>
-          <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Average Rating</p>
+          <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">Average Rating</p>
         </div>
-        <div class="bg-white border-2 border-blue-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
+        <div class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:border-blue-500 transform hover:-translate-y-1 transition-all duration-300 text-center">
           <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-comments text-blue-600 text-xl"></i>
           </div>
           <h3 class="text-4xl font-bold text-blue-600 mb-2">{{ statsReviews }}K+</h3>
-          <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Reviews</p>
+          <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">Reviews</p>
         </div>
-        <div class="bg-white border-2 border-pink-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
+        <div class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:border-pink-500 transform hover:-translate-y-1 transition-all duration-300 text-center">
           <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-heart text-pink-600 text-xl"></i>
           </div>
           <h3 class="text-4xl font-bold text-pink-600 mb-2">{{ statsSatisfaction }}%</h3>
-          <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Satisfaction</p>
+          <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">Satisfaction</p>
         </div>
       </div>
     </div>

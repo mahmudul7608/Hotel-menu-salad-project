@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="py-16 px-4 lg:px-28">
+  <section id="about" class="py-16 px-4 lg:px-40 bg-[#0a0a0a] relative overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <!-- Images Section -->
@@ -38,16 +38,16 @@
               <i class="fa-solid fa-calendar-check"></i> Since 2006
             </h4>
           </div>
-          <h1 class="text-5xl lg:text-6xl font-bold leading-tight text-gray-800">
+          <h1 class="text-5xl lg:text-6xl font-bold leading-tight text-white">
             We Have <span class="text-accent">18+</span> Years of<br />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Excellence</span> in Healthy Cuisine
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">Excellence</span> in Healthy Cuisine
           </h1>
-          <p class="text-lg leading-relaxed text-gray-600">
+          <p class="text-lg leading-relaxed text-gray-300">
             From our humble beginnings in 2006, we've been dedicated to revolutionizing healthy eating. 
             Our passion is crafting nutritious, delicious salads using only the freshest organic ingredients 
             sourced from local farms. Every bowl tells a story of health, flavor, and sustainability.
           </p>
-          <p class="text-lg leading-relaxed text-gray-600">
+          <p class="text-lg leading-relaxed text-gray-300">
             With award-winning chefs and nutritionists on our team, we've created over 50+ unique salad 
             combinations that don't just taste amazing—they transform lives. Join thousands of satisfied 
             customers who've made healthy eating a delightful daily habit with Salads.
@@ -56,7 +56,7 @@
           <!-- Stats Section -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6">
             <!-- Happy Customers Card -->
-            <div class="group relative overflow-hidden p-6 bg-white border-2 border-green-200 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+            <div class="group relative overflow-hidden p-6 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl shadow-lg hover:shadow-xl hover:border-accent transform hover:-translate-y-1 transition-all duration-300">
               <div class="relative z-10 text-center">
                 <div class="mb-3 flex justify-center">
                   <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
@@ -64,12 +64,12 @@
                   </div>
                 </div>
                 <h3 class="text-5xl font-bold text-accent mb-2">{{ happyCustomers }}K+</h3>
-                <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Happy Customers</p>
+                <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">Happy Customers</p>
               </div>
             </div>
 
             <!-- Unique Recipes Card -->
-            <div class="group relative overflow-hidden p-6 bg-white border-2 border-orange-200 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+            <div class="group relative overflow-hidden p-6 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl shadow-lg hover:shadow-xl hover:border-orange-500 transform hover:-translate-y-1 transition-all duration-300">
               <div class="relative z-10 text-center">
                 <div class="mb-3 flex justify-center">
                   <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center">
@@ -77,12 +77,12 @@
                   </div>
                 </div>
                 <h3 class="text-5xl font-bold text-orange-600 mb-2">{{ uniqueRecipes }}+</h3>
-                <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Unique Recipes</p>
+                <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">Unique Recipes</p>
               </div>
             </div>
 
             <!-- Organic Fresh Card -->
-            <div class="group relative overflow-hidden p-6 bg-white border-2 border-emerald-200 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+            <div class="group relative overflow-hidden p-6 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl shadow-lg hover:shadow-xl hover:border-blue-500 transform hover:-translate-y-1 transition-all duration-300">
               <div class="relative z-10 text-center">
                 <div class="mb-3 flex justify-center">
                   <div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center">
@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <h3 class="text-5xl font-bold text-emerald-600 mb-2">{{ organicFresh }}%</h3>
-                <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide">Organic Fresh</p>
+                <p class="text-gray-300 font-semibold text-sm uppercase tracking-wide">100% Organic</p>
               </div>
             </div>
           </div>
@@ -98,8 +98,8 @@
           <div class="pt-4 flex items-center gap-4">
             <img src="/img/sign.png" alt="Signature" class="h-16 opacity-80" />
             <div>
-              <p class="font-bold text-lg text-gray-800">Chef Abdul Rahman</p>
-              <p class="text-sm text-gray-600">Founder & Head Chef</p>
+              <p class="font-bold text-lg text-white">Chef Abdul Rahman</p>
+              <p class="text-sm text-gray-300">Founder & Head Chef</p>
             </div>
           </div>
         </div>
