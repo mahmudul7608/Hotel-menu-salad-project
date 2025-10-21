@@ -1,44 +1,60 @@
 <template>
-  <section id="features" class="py-16 px-4 lg:px-40 bg-[#0a0a0a]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-10">
+  <section id="features" class="py-20 px-4 lg:px-40 bg-[#0a0a0a] relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl"></div>
+    
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-16">
         <h2 class="text-5xl font-bold mb-4">
           Why Choose <span class="text-accent">Our Salads</span>
         </h2>
-        <p class="text-xl text-gray-300">
-          Discover the amazing benefits of our fresh and healthy salads
-        </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div
-          v-for="feature in features"
-          :key="feature.id"
-          :class="feature.bgClass"
-          class="rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
-        >
-          <div class="flex flex-col items-center text-center">
-            <div
-              :class="feature.iconBg"
-              class="w-20 h-20 rounded-full flex items-center justify-center mb-6"
-            >
+      
+      <!-- Two Column Layout: Points Left, Video Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Left Side - Feature Points -->
+        <div class="space-y-6">
+          <div
+            v-for="feature in features"
+            :key="feature.id"
+            class="flex items-center gap-5 group cursor-pointer"
+          >
+            <!-- Icon -->
+            <div class="flex-shrink-0">
               <i
                 :class="feature.icon"
                 :style="{ color: feature.iconColor }"
-                class="text-4xl"
+                class="text-4xl group-hover:scale-110 transition-transform duration-300"
               ></i>
             </div>
-            <h2
-              class="text-2xl font-bold mb-4"
-              :style="{ color: feature.titleColor }"
+            
+            <!-- Content -->
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-white group-hover:text-accent transition-colors">
+                {{ feature.title }}
+              </h3>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Side - Video -->
+        <div class="relative">
+          <!-- Glow Effect Behind Video -->
+          <div class="absolute -inset-4 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-3xl blur-3xl opacity-60"></div>
+          
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 hover:border-accent transition-all duration-300">
+            <video
+              class="w-full h-full object-cover"
+              autoplay
+              loop
+              muted
+              playsinline
             >
-              {{ feature.title }}
-            </h2>
-            <p
-              class="text-base leading-relaxed"
-              :style="{ color: feature.descColor }"
-            >
-              {{ feature.description }}
-            </p>
+              <source src="/img/SaladVideo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
@@ -52,73 +68,43 @@ const features = [
     id: 1,
     icon: "fa-solid fa-apple-whole",
     title: "Healthy Food",
-    description:
-      "Fresh organic ingredients packed with essential vitamins and minerals for your daily nutrition needs.",
-    bgClass: "bg-gradient-to-br from-orange-200 via-orange-300 to-red-300",
-    iconBg: "bg-white shadow-xl",
+    iconBgColor: "rgba(255, 69, 0, 0.2)",
     iconColor: "#ff4500",
-    titleColor: "#c0392b",
-    descColor: "#333",
   },
   {
     id: 2,
     icon: "fa-solid fa-utensils",
     title: "Fresh Salads",
-    description:
-      "Handpicked vegetables prepared daily to ensure maximum freshness and incredible taste in every bite.",
-    bgClass: "bg-gradient-to-br from-green-200 via-emerald-300 to-teal-300",
-    iconBg: "bg-white shadow-xl",
+    iconBgColor: "rgba(22, 160, 133, 0.2)",
     iconColor: "#16a085",
-    titleColor: "#0e6655",
-    descColor: "#333",
   },
   {
     id: 3,
     icon: "fa-solid fa-carrot",
     title: "Natural Fiber",
-    description:
-      "High fiber content promotes healthy digestion and helps maintain your energy levels throughout the day.",
-    bgClass: "bg-gradient-to-br from-purple-200 via-purple-300 to-fuchsia-300",
-    iconBg: "bg-white shadow-xl",
+    iconBgColor: "rgba(155, 89, 182, 0.2)",
     iconColor: "#9b59b6",
-    titleColor: "#5b2c6f",
-    descColor: "#333",
   },
   {
     id: 4,
     icon: "fa-solid fa-lemon",
     title: "Nutritional Food",
-    description:
-      "Perfectly balanced meals rich in antioxidants, vitamins, and nutrients to boost your immune system.",
-    bgClass: "bg-gradient-to-br from-yellow-200 via-amber-300 to-orange-300",
-    iconBg: "bg-white shadow-xl",
+    iconBgColor: "rgba(243, 156, 18, 0.2)",
     iconColor: "#f39c12",
-    titleColor: "#b7720d",
-    descColor: "#333",
   },
   {
     id: 5,
     icon: "fa-sharp fa-solid fa-heart-pulse",
     title: "Protect Your Heart",
-    description:
-      "Low cholesterol ingredients that support cardiovascular health and promote a healthy heart function.",
-    bgClass: "bg-gradient-to-br from-rose-200 via-pink-300 to-red-300",
-    iconBg: "bg-white shadow-xl",
+    iconBgColor: "rgba(231, 76, 60, 0.2)",
     iconColor: "#e74c3c",
-    titleColor: "#a93226",
-    descColor: "#333",
   },
   {
     id: 6,
     icon: "fa-solid fa-weight-scale",
     title: "Weight Control",
-    description:
-      "Low-calorie, high-protein options designed to help you maintain a healthy weight and lifestyle.",
-    bgClass: "bg-gradient-to-br from-sky-200 via-blue-300 to-indigo-300",
-    iconBg: "bg-white shadow-xl",
+    iconBgColor: "rgba(52, 152, 219, 0.2)",
     iconColor: "#3498db",
-    titleColor: "#1f618d",
-    descColor: "#333",
   },
 ];
 </script>

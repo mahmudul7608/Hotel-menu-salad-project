@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-navy-blue/95 backdrop-blur-sm py-8 px-4 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-md border-b border-white/10">
+    <nav class="bg-navy-blue-600/10 backdrop-blur-sm py-8 px-4 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-lg border-b border-white/20">
       <div class="flex justify-between items-center">
         <div class="text-4xl font-bold cursor-pointer text-white" @click="scrollToSection('home')">
           <h3 class="flex items-center">
@@ -10,46 +10,45 @@
         <div>
           <ul class="flex items-center gap-12 text-lg">
             <li><a @click.prevent="scrollToSection('home')" href="#home" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Home</a></li>
+            <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
+            <li><a @click.prevent="scrollToSection('salads')" href="#salads" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Salads</a></li>
             
             <!-- About Us Dropdown -->
-            <li class="relative">
+            <li class="relative group">
               <a 
-                @click.prevent="handleAboutClick"
                 href="#about" 
                 class="text-white hover:text-accent transition-colors cursor-pointer font-medium flex items-center gap-1"
               >
                 About Us
-                <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{ 'rotate-180': showAboutDropdown }"></i>
+                <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 group-hover:rotate-180"></i>
               </a>
               
               <!-- Dropdown Menu -->
-              <div v-if="showAboutDropdown" class="absolute top-full left-0 mt-4 w-64 bg-white rounded-xl shadow-2xl border-2 border-gray-100 overflow-hidden z-50">
+              <div class="absolute top-full left-0 mt-4 w-56 bg-white rounded-xl shadow-2xl border-2 border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <a 
-                  @click.prevent="scrollToSectionAndClose('features')" 
-                  href="#features" 
-                  class="block px-6 py-4 text-gray-800 hover:bg-primary hover:text-accent transition-colors font-medium border-b border-gray-100"
+                  @click.prevent="scrollToSection('about')" 
+                  href="#about" 
+                  class="block px-6 py-4 text-gray-800 hover:bg-accent hover:text-white transition-colors font-medium border-b border-gray-100"
                 >
-                  <i class="fa-solid fa-star mr-2"></i> Why Choose Our Salads
+                  <i class="fa-solid fa-info-circle mr-2"></i> About
                 </a>
                 <a 
-                  @click.prevent="scrollToSectionAndClose('chef')" 
+                  @click.prevent="scrollToSection('chef')" 
                   href="#chef" 
-                  class="block px-6 py-4 text-gray-800 hover:bg-primary hover:text-accent transition-colors font-medium border-b border-gray-100"
+                  class="block px-6 py-4 text-gray-800 hover:bg-accent hover:text-white transition-colors font-medium border-b border-gray-100"
                 >
-                  <i class="fa-solid fa-hat-chef mr-2"></i> Meet Our Best Chef's
+                  <i class="fa-solid fa-hat-chef mr-2"></i> Our Chef
                 </a>
                 <a 
-                  @click.prevent="scrollToSectionAndClose('reviews')" 
+                  @click.prevent="scrollToSection('reviews')" 
                   href="#reviews" 
-                  class="block px-6 py-4 text-gray-800 hover:bg-primary hover:text-accent transition-colors font-medium"
+                  class="block px-6 py-4 text-gray-800 hover:bg-accent hover:text-white transition-colors font-medium"
                 >
-                  <i class="fa-solid fa-comments mr-2"></i> Guest Reviews
+                  <i class="fa-solid fa-comments mr-2"></i> Guest Review
                 </a>
               </div>
             </li>
             
-            <li><a @click.prevent="scrollToSection('salads')" href="#salads" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Salads</a></li>
-            <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
             <li><a @click.prevent="scrollToSection('contact')" href="#contact" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Contact</a></li>
             <li><i @click="toggleSearch" class="fa-solid fa-magnifying-glass cursor-pointer text-white hover:text-accent transition-colors"></i></li>
           </ul>
@@ -68,7 +67,7 @@
               type="text"
               v-model="searchQuery"
               placeholder="Search for salads, healthy food..."
-              class="w-full px-6 py-4 pl-14 pr-32 text-lg border-2 border-primary rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
+              class="w-full px-6 py-4 pl-14 pr-32 text-lg text-gray-900 border-2 border-primary rounded-full focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-400"
               @keyup.escape="closeSearch"
               @keyup.enter="goToSearchPage"
             />
@@ -157,26 +156,12 @@ import { ref, computed, watch, nextTick } from 'vue';
 const showSearch = ref(false);
 const searchQuery = ref('');
 const searchInput = ref(null);
-const showAboutDropdown = ref(false);
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-};
-
-const toggleAboutDropdown = () => {
-  showAboutDropdown.value = !showAboutDropdown.value;
-};
-
-const handleAboutClick = () => {
-  toggleAboutDropdown();
-};
-
-const scrollToSectionAndClose = (sectionId) => {
-  scrollToSection(sectionId);
-  showAboutDropdown.value = false;
 };
 
 const toggleSearch = () => {

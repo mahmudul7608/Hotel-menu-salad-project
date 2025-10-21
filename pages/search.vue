@@ -1,8 +1,12 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl"></div>
     <Navigation />
     
-    <div class="pt-32 pb-16 px-4">
+    <div class="pt-32 pb-16 px-4 relative z-10">
       <div class="max-w-7xl mx-auto">
         <!-- Search Header -->
         <div class="mb-8 relative">
@@ -13,15 +17,15 @@
           >
             <i class="fa-solid fa-times text-2xl group-hover:rotate-90 transition-transform duration-300"></i>
           </button>
-          <h1 class="text-4xl font-bold mb-2">Search Results</h1>
-          <p class="text-xl text-gray-600">
+          <h1 class="text-4xl font-bold mb-2 text-white">Search Results</h1>
+          <p class="text-xl text-gray-300">
             <span v-if="isLoading" class="text-accent font-bold">Searching...</span>
-            <span v-else>
+            <span v-else class="text-white">
               Found <span class="text-accent font-bold">{{ filteredItems.length }}</span> items for 
-              <span class="font-semibold">"{{ searchQuery }}"</span>
+              <span class="font-semibold text-white">"{{ searchQuery }}"</span>
             </span>
           </p>
-          <p v-if="apiItems.length > 0" class="text-sm text-green-600 mt-2">
+          <p v-if="apiItems.length > 0" class="text-sm text-green-400 mt-2">
             <i class="fa-solid fa-check-circle"></i> Including {{ apiItems.length }} items from TheMealDB API
           </p>
         </div>
@@ -29,7 +33,7 @@
         <!-- Loading Indicator -->
         <div v-if="isLoading" class="text-center py-20">
           <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-accent"></div>
-          <p class="text-xl text-gray-600 mt-4">Searching for delicious meals...</p>
+          <p class="text-xl text-gray-300 mt-4">Searching for delicious meals...</p>
         </div>
 
         <!-- Search Results Grid -->
@@ -37,16 +41,16 @@
           <div
             v-for="item in filteredItems"
             :key="item.id"
-            class="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:border-primary transition-all duration-300 transform hover:-translate-y-1"
+            class="bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-6 hover:shadow-xl hover:border-accent transition-all duration-300 transform hover:-translate-y-1"
           >
             <div class="flex justify-between items-start mb-4">
               <div class="flex-1">
-                <h3 class="text-xl font-bold mb-2">{{ item.name }}</h3>
+                <h3 class="text-xl font-bold mb-2 text-white">{{ item.name }}</h3>
                 <div class="flex items-center gap-2 mb-3">
                   <span class="text-accent font-bold text-2xl">Tk {{ item.price }}</span>
                   <span v-if="item.oldPrice" class="text-gray-400 line-through text-sm">Tk {{ item.oldPrice }}</span>
                 </div>
-                <p class="text-sm text-gray-600 leading-relaxed mb-4">{{ item.description }}</p>
+                <p class="text-sm text-gray-300 leading-relaxed mb-4">{{ item.description }}</p>
                 <div class="flex flex-wrap gap-2">
                   <span
                     v-for="tag in item.tags"
@@ -63,7 +67,7 @@
             </div>
             <button 
               @click="addToCart(item)"
-              class="w-full bg-primary hover:bg-accent text-black hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              class="w-full bg-accent hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <i class="fa-solid fa-plus"></i>
               Add to Cart
@@ -73,9 +77,9 @@
 
         <!-- No Results -->
         <div v-else-if="!isLoading" class="text-center py-20">
-          <i class="fa-solid fa-search text-8xl text-gray-300 mb-6"></i>
-          <h2 class="text-3xl font-bold text-gray-700 mb-4">No items found</h2>
-          <p class="text-xl text-gray-500 mb-8">Try searching for something else</p>
+          <i class="fa-solid fa-search text-8xl text-gray-500 mb-6"></i>
+          <h2 class="text-3xl font-bold text-white mb-4">No items found</h2>
+          <p class="text-xl text-gray-300 mb-8">Try searching for something else</p>
           <button 
             @click="navigateTo('/')"
             class="bg-accent hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300"

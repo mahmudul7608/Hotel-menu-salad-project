@@ -1,8 +1,9 @@
 <template>
-  <section id="reviews" class="bg-[#0a0a0a] py-16 px-4 lg:px-28 relative overflow-hidden">
-    <!-- Decorative Background Elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-green-200/30 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-80 h-80 bg-teal-200/30 rounded-full blur-3xl"></div>
+  <section id="reviews" class="bg-[#0a0a0a] py-20 px-4 lg:px-28 relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
     <div class="max-w-7xl mx-auto relative z-10">
       <!-- Header -->
       <div class="text-center mb-12">

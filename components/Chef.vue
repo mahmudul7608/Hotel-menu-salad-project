@@ -1,6 +1,11 @@
 <template>
-  <section id="chef" class="py-16 px-4 lg:px-40 bg-[#0a0a0a]">
-    <div class="max-w-7xl mx-auto">
+  <section id="chef" class="py-20 px-4 lg:px-40 bg-[#0a0a0a] relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-10 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-80 h-80 bg-green-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
+    
+    <div class="max-w-7xl mx-auto relative z-10">
       <!-- Header -->
       <div class="text-center mb-12">
         <h1 class="text-5xl lg:text-6xl font-bold mb-4">

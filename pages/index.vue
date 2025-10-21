@@ -2,10 +2,10 @@
   <div class="min-h-screen bg-dark-gradient">
     <Navigation />
     <Hero />
-    <About />
-    <Salads />
     <Menu />
     <Features />
+    <Salads />
+    <About />
     <Chef />
     <Reviews />
     <Newsletter />

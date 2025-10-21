@@ -1,6 +1,11 @@
 <template>
-  <section id="menu" class="bg-[#0a0a0a] py-16 px-4 relative">
-    <div class="max-w-7xl mx-auto">
+  <section id="menu" class="bg-[#0a0a0a] py-20 px-4 relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-20 left-10 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl"></div>
+    
+    <div class="max-w-7xl mx-auto relative z-10">
       <!-- Header -->
       <div class="text-center mb-8">
         <h1 class="text-5xl font-bold mb-4">
@@ -30,12 +35,6 @@
 
       <!-- Popular Section -->
       <div class="mb-8">
-        <div class="flex items-center gap-3 mb-6">
-          <i class="fa-solid fa-fire text-accent text-3xl"></i>
-          <h2 class="text-3xl font-bold">Popular</h2>
-        </div>
-        <p class="text-gray-300 mb-8">Most ordered right now.</p>
-
         <!-- Menu Items Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
@@ -75,14 +74,14 @@
           </div>
         </div>
 
-        <!-- Load More Button -->
+        <!-- More Button -->
         <div v-if="hasMoreItems" class="text-center mt-12">
           <button 
             @click="loadMore"
             class="group bg-gradient-to-r from-accent to-green-600 text-white px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto"
           >
             <i class="fa-solid fa-plus-circle text-2xl"></i>
-            Load More Items
+            More
             <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
           </button>
           <p class="text-gray-300 mt-4">
@@ -190,7 +189,7 @@ import { ref, computed, reactive } from 'vue';
 const activeCategory = ref('all');
 const showCart = ref(false);
 const cart = reactive([]);
-const itemsPerPage = 8;
+const itemsPerPage = 6;
 const currentPage = ref(1);
 
 const categories = [

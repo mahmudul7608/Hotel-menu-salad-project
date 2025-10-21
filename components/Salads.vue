@@ -1,18 +1,53 @@
 <template>
-  <section id="salads" class="py-16 px-4 bg-[#0a0a0a]">
-    <div class="text-center mb-8">
-      <h1 class="text-5xl font-bold">
-        Our <span class="text-accent">Popular</span> salads
-      </h1>
-    </div>
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
-      <div v-for="salad in salads" :key="salad.id" :class="salad.bgClass" class="rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-        <div class="flex justify-center mb-6">
-          <img :src="salad.image" :alt="salad.name" class="w-48 h-48 rounded-full border-8 border-white shadow-xl" />
-        </div>
-        <div class="text-center px-6">
-          <h2 class="text-3xl font-bold mb-4" :class="salad.titleClass">{{ salad.name }}</h2>
-          <h5 class="text-base leading-7 text-gray-700">{{ salad.description }}</h5>
+  <section id="salads" class="py-20 px-4 bg-[#0a0a0a] relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-10 left-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-green-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-500/5 rounded-full blur-3xl"></div>
+    
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-16">
+        <h1 class="text-5xl font-bold text-white mb-2">
+          Our <span class="text-accent">Popular</span> Salads
+        </h1>
+      </div>
+
+      <!-- 3 Card Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="salad in salads" :key="salad.id" class="bg-gray-100 rounded-3xl p-6 hover:shadow-2xl transition-all duration-300 group">
+          <!-- Title -->
+          <h2 class="text-3xl font-bold text-gray-900 mb-6 leading-tight">
+            {{ salad.name }}
+          </h2>
+          
+          <!-- Description -->
+          <p v-if="salad.description" class="text-gray-600 text-base mb-6 leading-relaxed">
+            {{ salad.description }}
+          </p>
+          
+          <!-- Image Container -->
+          <div class="relative rounded-2xl overflow-hidden mb-6">
+            <img :src="salad.image" :alt="salad.name" class="w-full h-64 object-cover" />
+            
+            <!-- View Count Badge -->
+            <div v-if="salad.views" class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2">
+              <i class="fa-solid fa-eye text-gray-700 text-sm"></i>
+              <span class="text-gray-900 font-semibold text-sm">{{ salad.views }}+</span>
+            </div>
+            
+            <!-- Tags -->
+            <div v-if="salad.tags" class="absolute bottom-4 left-4 flex gap-2">
+              <span v-for="tag in salad.tags" :key="tag" class="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-gray-900 text-xs font-semibold">
+                {{ tag }}
+              </span>
+            </div>
+          </div>
+          
+          <!-- Button -->
+          <button class="w-full bg-gray-900 hover:bg-accent text-white font-semibold py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 group-hover:scale-105">
+            <span>See Complete Recipe</span>
+            <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -23,27 +58,27 @@
 const salads = [
   {
     id: 1,
-    name: 'Fruit Salad',
+    name: 'Spicy Vermicelli Noodles Salad',
+    description: null,
     image: '/img/s1.jpg',
-    description: 'A vibrant blend of fresh seasonal fruits, perfectly balanced with natural sweetness and a hint of citrus. Refreshing and nutritious.',
-    bgClass: 'bg-gradient-to-br from-orange-100 to-pink-100',
-    titleClass: 'text-orange-600'
+    views: 100,
+    tags: null
   },
   {
     id: 2,
-    name: 'Green Salad',
+    name: 'Classic Italian Beef Maltagliati',
+    description: 'Layers of spicy goodness, hearty meat, and savory sauce. A timeless favorite with Maltagliati pasta.',
     image: '/img/s2.jpg',
-    description: 'Crispy mixed greens tossed with garden-fresh vegetables, topped with our signature herb dressing. Light, healthy, and delicious.',
-    bgClass: 'bg-gradient-to-br from-green-100 to-emerald-100',
-    titleClass: 'text-green-600'
+    views: 500,
+    tags: ['Italian Food', 'Step by Step Guides']
   },
   {
     id: 3,
-    name: 'Dessert Salads',
+    name: 'Sour & Spicy Korean Kimchi',
+    description: null,
     image: '/img/s3.jpg',
-    description: 'Indulge in this sweet treat combining fresh fruits, creamy yogurt, and crunchy toppings. A guilt-free dessert experience.',
-    bgClass: 'bg-gradient-to-br from-pink-100 to-rose-100',
-    titleClass: 'text-pink-600'
+    views: 200,
+    tags: null
   }
 ];
 </script>
