@@ -1,17 +1,17 @@
 <template>
   <section
     id="about"
-    class="py-20 px-4 lg:px-40 bg-[#0a0a0a] relative overflow-hidden"
+    class="py-20 px-4 lg:px-40 bg-transparent relative overflow-hidden"
   >
     <!-- Blur Background Effects -->
     <div
-      class="absolute top-20 left-10 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"
+      class="absolute top-20 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
     ></div>
     <div
-      class="absolute bottom-20 right-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
+      class="absolute bottom-20 right-10 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"
     ></div>
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl"
     ></div>
 
     <div class="max-w-7xl mx-auto relative z-10">
@@ -27,7 +27,7 @@
             class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 hover:border-accent transition-all duration-300"
           >
             <video
-              class="w-full h-[700px] object-cover"
+              class="w-full h-[330px] object-cover"
               autoplay
               loop
               muted
@@ -36,6 +36,13 @@
               <source src="/img/AboutVideo.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+          </div>
+          <div class="pt-6 flex items-center gap-4">
+            <img src="/img/rahman.png" alt="Signature" class="h-16 opacity-80" />
+            <div>
+              <p class="font-bold text-xl text-white">Chef Abdul Rahman</p>
+              <p class="text-sm text-gray-400">Founder & Head Chef</p>
+            </div>
           </div>
         </div>
 
@@ -62,20 +69,7 @@
             delicious salads using only the freshest organic ingredients sourced
             from local farms.
           </p>
-          <p class="text-lg leading-relaxed text-gray-400">
-            With award-winning chefs and nutritionists on our team, we've
-            created unique salad combinations that transform lives. Join
-            thousands of satisfied customers who've made healthy eating a
-            delightful daily habit.
-          </p>
 
-          <div class="pt-6 flex items-center gap-4">
-            <img src="/img/sign.png" alt="Signature" class="h-16 opacity-80" />
-            <div>
-              <p class="font-bold text-xl text-white">Chef Abdul Rahman</p>
-              <p class="text-sm text-gray-400">Founder & Head Chef</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

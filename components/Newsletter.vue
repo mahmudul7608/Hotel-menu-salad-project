@@ -1,9 +1,9 @@
 <template>
-  <section id="contact" class="py-20 px-4 bg-[#0a0a0a] relative overflow-hidden">
+  <section id="contact" class="py-20 px-4 bg-transparent relative overflow-hidden">
     <!-- Blur Background Effects -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-3xl"></div>
     
     <div class="max-w-5xl mx-auto text-center relative z-10">
       <!-- Icon -->

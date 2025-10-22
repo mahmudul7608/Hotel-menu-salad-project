@@ -19,6 +19,8 @@ export default {
       },
       backgroundImage: {
         'dark-gradient': 'linear-gradient(180deg, #1a2332 0%, #0d1623 50%, #0a0f1a 100%)',
+        'colorful-gradient': 'linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #1a1a2e 100%)',
+        'vibrant-gradient': 'radial-gradient(circle at 20% 50%, rgba(83, 52, 131, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(15, 52, 96, 0.3) 0%, transparent 50%), linear-gradient(135deg, #0a0e27 0%, #16213e 25%, #1a1a40 50%, #2d1b4e 75%, #0a0e27 100%)',
       },
       fontFamily: {
         alkalami: ['Alkalami', 'serif'],

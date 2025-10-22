@@ -1,6 +1,9 @@
 <template>
-  <footer id="contact" class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-16 px-4 scroll-mt-20">
-    <div class="max-w-7xl mx-auto">
+  <footer id="contact" class="bg-gradient-to-br from-[#0a0e27] via-[#16213e] to-[#0f1623] text-white py-16 px-4 scroll-mt-20 relative overflow-hidden">
+    <!-- Blur Background Effects -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
       <!-- Main Footer Content -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <!-- About Section -->

@@ -1,17 +1,17 @@
 <template>
   <section
     id="home"
-    class="min-h-screen flex items-center px-4 lg:px-20 pt-20 bg-[#0a0a0a] relative overflow-hidden"
+    class="min-h-screen flex items-center px-4 lg:px-20 pt-20 bg-transparent relative overflow-hidden"
   >
     <!-- Blur Background Effects -->
     <div
-      class="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
+      class="absolute top-20 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
     ></div>
     <div
-      class="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
+      class="absolute bottom-20 right-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl"
     ></div>
     <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl"
     ></div>
 
     <!-- Main Content Container -->

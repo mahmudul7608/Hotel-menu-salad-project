@@ -1,9 +1,9 @@
 <template>
-  <section id="chef" class="py-20 px-4 lg:px-40 bg-[#0a0a0a] relative overflow-hidden">
+  <section id="chef" class="py-20 px-4 lg:px-40 bg-transparent relative overflow-hidden">
     <!-- Blur Background Effects -->
-    <div class="absolute top-10 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-10 left-10 w-80 h-80 bg-green-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-10 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-3xl"></div>
     
     <div class="max-w-7xl mx-auto relative z-10">
       <!-- Header -->
@@ -22,7 +22,7 @@
         <!-- Chef 1 -->
         <div class="group bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-accent transition-all duration-300 transform hover:-translate-y-2">
           <div class="relative overflow-hidden">
-            <img src="/img/team1.jpg" alt="Chef Rahman" class="w-full h-72 object-cover object-[center_30%] transform group-hover:scale-110 transition-transform duration-500" />
+            <img src="/img/rahman.png" alt="Chef Rahman" class="w-full h-72 object-cover object-[center_30%] transform group-hover:scale-110 transition-transform duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
               <div class="flex gap-3">

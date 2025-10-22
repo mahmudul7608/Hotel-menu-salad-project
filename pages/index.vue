@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-dark-gradient">
+  <div class="min-h-screen bg-vibrant-gradient">
     <Navigation />
     <Hero />
     <Menu />
