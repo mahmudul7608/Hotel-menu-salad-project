@@ -8,7 +8,7 @@ This project showcases a clean and modern design suitable for restaurant or hote
 ---
 
 ## 🔗 Live Demo  
-👉 [View Project](https://salad-section-hotel-sector.netlify.app)  
+https://onlineorder-saladmenu.netlify.app/
 
 ---
 
