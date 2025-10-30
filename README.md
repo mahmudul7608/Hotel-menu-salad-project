@@ -1,6 +1,6 @@
 # 🍴 Hotel / Salad Menu Website (Nuxt 3)
 
-![Preview Screenshot](https://github.com/mahmudul7608/hotel/assets/146390183/fb7f955d-f434-4be3-88ae-8c219ee6d47d)
+<img width="1906" height="874" alt="Screenshot 2025-10-30 211751" src="https://github.com/user-attachments/assets/ac4e45be-38dc-4df2-93d7-c10d3fad9933" />
 
 A modern **Hotel / Salad Menu Template** built with **Nuxt 3** and **Tailwind CSS**.  
 This project showcases a clean and modern design suitable for restaurant or hotel websites.  
