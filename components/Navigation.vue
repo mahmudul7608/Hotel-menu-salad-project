@@ -1,13 +1,16 @@
 <template>
   <div>
-    <nav class="bg-navy-blue-600/10 backdrop-blur-sm py-8 px-4 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-lg border-b border-white/20">
+    <nav class="bg-navy-blue-600/10 backdrop-blur-sm py-6 md:py-8 px-4 md:px-8 lg:px-40 fixed top-0 left-0 right-0 z-50 shadow-lg border-b border-white/20">
       <div class="flex justify-between items-center">
-        <div class="text-4xl font-bold cursor-pointer text-white" @click="scrollToSection('home')">
+        <!-- Logo -->
+        <div class="text-3xl md:text-4xl font-bold cursor-pointer text-white" @click="scrollToSection('home')">
           <h3 class="flex items-center">
-            Sa<i class="fa-sharp fa-solid fa-spoon text-orange-500 -rotate-45 -ml-1 text-3xl"></i>ads
+            Sa<i class="fa-sharp fa-solid fa-spoon text-orange-500 -rotate-45 -ml-1 text-2xl md:text-3xl"></i>ads
           </h3>
         </div>
-        <div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:block">
           <ul class="flex items-center gap-12 text-lg">
             <li><a @click.prevent="scrollToSection('home')" href="#home" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Home</a></li>
             <li><a @click.prevent="scrollToSection('menu')" href="#menu" class="text-white hover:text-accent transition-colors cursor-pointer font-medium">Menu</a></li>
@@ -53,8 +56,155 @@
             <li><i @click="toggleSearch" class="fa-solid fa-magnifying-glass cursor-pointer text-white hover:text-accent transition-colors"></i></li>
           </ul>
         </div>
+
+        <!-- Mobile Menu Icons -->
+        <div class="flex items-center gap-4 lg:hidden">
+          <i @click="toggleSearch" class="fa-solid fa-magnifying-glass cursor-pointer text-white hover:text-accent transition-colors text-xl"></i>
+          
+          <!-- Hamburger Menu Button -->
+          <button 
+            @click="toggleMobileMenu" 
+            class="relative w-10 h-10 flex flex-col justify-center items-center group"
+            aria-label="Toggle mobile menu"
+          >
+            <span 
+              class="hamburger-line top"
+              :class="{ 'hamburger-active-top': mobileMenuOpen }"
+            ></span>
+            <span 
+              class="hamburger-line middle"
+              :class="{ 'hamburger-active-middle': mobileMenuOpen }"
+            ></span>
+            <span 
+              class="hamburger-line bottom"
+              :class="{ 'hamburger-active-bottom': mobileMenuOpen }"
+            ></span>
+          </button>
+        </div>
       </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <transition name="mobile-menu">
+      <div 
+        v-if="mobileMenuOpen" 
+        class="fixed inset-0 z-[60] lg:hidden"
+      >
+        <!-- Backdrop -->
+        <div 
+          class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          @click="closeMobileMenu"
+        ></div>
+        
+        <!-- Mobile Menu Panel -->
+        <div class="absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-gradient-to-br from-green-600 to-green-800 shadow-2xl overflow-y-auto">
+          <!-- Menu Header -->
+          <div class="p-6 border-b border-white/20">
+            <div class="flex justify-between items-center">
+              <h3 class="text-3xl font-bold text-white flex items-center">
+                Sa<i class="fa-sharp fa-solid fa-spoon text-orange-400 -rotate-45 -ml-1 text-2xl"></i>ads
+              </h3>
+              <button 
+                @click="closeMobileMenu" 
+                class="text-white hover:text-orange-400 transition-colors"
+              >
+                <i class="fa-solid fa-times text-2xl"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Menu Links -->
+          <nav class="p-6">
+            <ul class="space-y-2">
+              <li>
+                <a 
+                  @click.prevent="handleMobileNavClick('home')" 
+                  href="#home" 
+                  class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-all font-medium text-lg"
+                >
+                  <i class="fa-solid fa-home mr-3 text-orange-400"></i>Home
+                </a>
+              </li>
+              <li>
+                <a 
+                  @click.prevent="handleMobileNavClick('menu')" 
+                  href="#menu" 
+                  class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-all font-medium text-lg"
+                >
+                  <i class="fa-solid fa-utensils mr-3 text-orange-400"></i>Menu
+                </a>
+              </li>
+              <li>
+                <a 
+                  @click.prevent="handleMobileNavClick('salads')" 
+                  href="#salads" 
+                  class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-all font-medium text-lg"
+                >
+                  <i class="fa-solid fa-leaf mr-3 text-orange-400"></i>Salads
+                </a>
+              </li>
+              
+              <!-- Mobile About Us Section -->
+              <li>
+                <button 
+                  @click="toggleMobileAbout" 
+                  class="w-full flex items-center justify-between px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-all font-medium text-lg"
+                >
+                  <span>
+                    <i class="fa-solid fa-info-circle mr-3 text-orange-400"></i>About Us
+                  </span>
+                  <i 
+                    class="fa-solid fa-chevron-down text-sm transition-transform duration-300"
+                    :class="{ 'rotate-180': mobileAboutOpen }"
+                  ></i>
+                </button>
+                <transition name="mobile-submenu">
+                  <ul v-if="mobileAboutOpen" class="mt-2 ml-4 space-y-1">
+                    <li>
+                      <a 
+                        @click.prevent="handleMobileNavClick('about')" 
+                        href="#about" 
+                        class="block px-4 py-2 text-white/90 hover:bg-white/10 rounded-lg transition-all text-base"
+                      >
+                        <i class="fa-solid fa-info-circle mr-2 text-orange-300 text-sm"></i>About
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        @click.prevent="handleMobileNavClick('chef')" 
+                        href="#chef" 
+                        class="block px-4 py-2 text-white/90 hover:bg-white/10 rounded-lg transition-all text-base"
+                      >
+                        <i class="fa-solid fa-hat-chef mr-2 text-orange-300 text-sm"></i>Our Chef
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        @click.prevent="handleMobileNavClick('reviews')" 
+                        href="#reviews" 
+                        class="block px-4 py-2 text-white/90 hover:bg-white/10 rounded-lg transition-all text-base"
+                      >
+                        <i class="fa-solid fa-comments mr-2 text-orange-300 text-sm"></i>Guest Review
+                      </a>
+                    </li>
+                  </ul>
+                </transition>
+              </li>
+              
+              <li>
+                <a 
+                  @click.prevent="handleMobileNavClick('contact')" 
+                  href="#contact" 
+                  class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-all font-medium text-lg"
+                >
+                  <i class="fa-solid fa-envelope mr-3 text-orange-400"></i>Contact
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </transition>
 
     <!-- Search Modal -->
     <div v-if="showSearch" class="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-start justify-center pt-20" @click="closeSearch">
@@ -156,12 +306,39 @@ import { ref, computed, watch, nextTick } from 'vue';
 const showSearch = ref(false);
 const searchQuery = ref('');
 const searchInput = ref(null);
+const mobileMenuOpen = ref(false);
+const mobileAboutOpen = ref(false);
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+};
+
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value;
+  if (mobileMenuOpen.value) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+    mobileAboutOpen.value = false;
+  }
+};
+
+const closeMobileMenu = () => {
+  mobileMenuOpen.value = false;
+  mobileAboutOpen.value = false;
+  document.body.style.overflow = '';
+};
+
+const toggleMobileAbout = () => {
+  mobileAboutOpen.value = !mobileAboutOpen.value;
+};
+
+const handleMobileNavClick = (sectionId) => {
+  scrollToSection(sectionId);
+  closeMobileMenu();
 };
 
 const toggleSearch = () => {
@@ -309,3 +486,76 @@ const filteredItems = computed(() => {
   );
 });
 </script>
+
+<style scoped>
+/* Hamburger Menu Lines */
+.hamburger-line {
+  @apply block w-7 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out;
+}
+
+.hamburger-line.top {
+  @apply mb-1.5;
+}
+
+.hamburger-line.middle {
+  @apply mb-1.5;
+}
+
+/* Hamburger Active States (Transform to X) */
+.hamburger-active-top {
+  @apply rotate-45 translate-y-2 bg-orange-400;
+}
+
+.hamburger-active-middle {
+  @apply opacity-0 translate-x-3;
+}
+
+.hamburger-active-bottom {
+  @apply -rotate-45 -translate-y-2 bg-orange-400;
+}
+
+/* Mobile Menu Transitions */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-enter-active .absolute.right-0,
+.mobile-menu-leave-active .absolute.right-0 {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+}
+
+.mobile-menu-enter-from .absolute.right-0 {
+  transform: translateX(100%);
+}
+
+.mobile-menu-leave-to .absolute.right-0 {
+  transform: translateX(100%);
+}
+
+/* Mobile Submenu Transitions */
+.mobile-submenu-enter-active,
+.mobile-submenu-leave-active {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.mobile-submenu-enter-from,
+.mobile-submenu-leave-to {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+}
+
+.mobile-submenu-enter-to,
+.mobile-submenu-leave-from {
+  opacity: 1;
+  max-height: 200px;
+  transform: translateY(0);
+}
+</style>
