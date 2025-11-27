@@ -1,6 +1,6 @@
 # 🍴 Hotel / Salad Menu Website (Nuxt 3)
 
-![Preview Screenshot](https://github.com/mahmudul7608/hotel/assets/146390183/fb7f955d-f434-4be3-88ae-8c219ee6d47d)
+<img width="1904" height="869" alt="image" src="https://github.com/user-attachments/assets/84eca518-2428-408b-9825-edaf876a994e" />
 
 A modern **Hotel / Salad Menu Template** built with **Nuxt 3** and **Tailwind CSS**.  
 This project showcases a clean and modern design suitable for restaurant or hotel websites.  
@@ -8,7 +8,7 @@ This project showcases a clean and modern design suitable for restaurant or hote
 ---
 
 ## 🔗 Live Demo  
-👉 [View Project](https://salad-section-hotel-sector.netlify.app)  
+👉 [View Project : https://onlineorder-saladmenu.netlify.app/
 
 ---
 
